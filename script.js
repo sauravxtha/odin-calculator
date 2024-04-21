@@ -1,36 +1,73 @@
 const display = document.querySelector(".display span");
-const btn1 = document.querySelector("#one");
-const btn2 = document.querySelector("#two");
-const btn3 = document.querySelector("#three");
-const btn4 = document.querySelector("#four");
-const btn5 = document.querySelector("#five");
-const btn6 = document.querySelector("#six");
-const btn7 = document.querySelector("#seven");
-const btn8 = document.querySelector("#eight");
-const btn9 = document.querySelector("#nine");
-const btn0 = document.querySelector("#zero");
-const btnSub = document.querySelector("#sub");
-const btnAdd = document.querySelector("#add");
-const btnMultiply = document.querySelector("#multiply");
-const btnEquals = document.querySelector("#equals");
 const calcBtns = document.querySelectorAll("button");
+let left = "";
+let right = "";
+let operator = "";
 let currentDisplay = "";
 calcBtns.forEach((button) => {
   button.addEventListener("click", () => {
     if (button.textContent == "=") {
-      calculateExpression();
+      calculateExpression(display.textContent);
+    } else if (button.textContent == "AC") {
+      console.log("clicked");
+      currentDisplay = "";
+      left = "";
+      right = "";
+      operator = "";
+      display.textContent = "";
+    } else if (button.textContent == "+") {
+      if (operator) {
+        calculateExpression();
+      }
+      operator = "+";
+      updateDisplay();
+    } else if (button.textContent == "-") {
+      if (operator) {
+        calculateExpression();
+      }
+      operator = "-";
+      updateDisplay();
+    } else if (button.textContent == "*") {
+      if (operator) {
+        calculateExpression();
+      }
+      operator = "*";
+      updateDisplay();
     } else {
-      updateDisplay(button.textContent);
+      if (!operator) {
+        left += button.textContent;
+        updateDisplay();
+      } else {
+        right += button.textContent;
+        updateDisplay();
+      }
     }
   });
 });
 
-const updateDisplay = (value) => {
-  currentDisplay += value;
-  display.textContent = currentDisplay;
+const updateDisplay = () => {
+  display.textContent = left + operator + right;
 };
 
-const calculateExpression = () => {
-  console.log(currentDisplay);
-  currentDisplay = "";
+const calculateExpression = (expression) => {
+  switch (operator) {
+    case "+":
+      display.textContent = +left + +right;
+      left = +left + +right;
+      right = "";
+      operator = "";
+      break;
+    case "-":
+      display.textContent = +left - +right;
+      left = +left - +right;
+      right = "";
+      operator = "";
+      break;
+    case "*":
+      display.textContent = +left * +right;
+      left = +left * +right;
+      right = "";
+      operator = "";
+      break;
+  }
 };
