@@ -1,0 +1,41 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main {
+  text-align: center;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+.display {
+  text-align: right;
+  width: auto;
+  background-color: grey;
+  height: 80px;
+  font-size: 3rem;
+  padding: 0 10px;
+  position: relative;
+}
+.display span {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 10px;
+}
+.calc-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.calc-buttons button {
+  flex: 0 0 33.3333%;
+  font-size: 3rem;
+  padding: 10px;
+}
+
+#equals {
+  flex: 0 0 66.666%;
+}
